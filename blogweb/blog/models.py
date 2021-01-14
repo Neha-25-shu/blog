@@ -2,8 +2,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from accounts.models import User
-# from tinymce import models as tinymce_models
-# from accounts.models import Profile
 from tinymce.models import HTMLField
 
 # Create your models here.
@@ -18,8 +16,18 @@ class Category(models.Model):
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         super().save(*args,**kwargs)
+        
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    content = models.TextField()
 
-class post(models.Model):
+    def __str__(self):
+        return self.user.username
+
+
+class Post(models.Model):
     statuses = [('D','Draft'),('P','Published')]
     title = models.CharField(max_length=70)
     slug = models.SlugField(unique=True, blank=True)

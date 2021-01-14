@@ -20,6 +20,52 @@
                     <p class= "content">{{ posts.content|safe }}</p>    
                 </div>
             </div>
+
+            <!--comments-->
+            <div id = "cards">
+                <div class= "card" style="position: static;">
+                    <h2>Comments({{post_comments_count}})</h2>
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <!--display coment-->
+                
+                            <div class="media-list">
+                                {% for comment in post_comments %}
+                                <div>
+                                    <div class="avatar">
+                                        {% if user.profile.image %}
+                                            <img src="{{user.profile.image.url}}"  alt="..." class="img-fluid" class="rounded float-right" height="100px" width="100px">
+                                        {% else %}
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1024px-User_icon_2.svg.png" class="rounded float-right" height="300px" width="300px">
+                                        {% endif %}
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="small-1">
+                                            <b> {{comment.user}}</b>
+                                            <time class="ml-3 opaciy-70 small-3"> {{comment.date}}</time>
+                                        </div>
+                                        <p> {{comment.content}}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            
+                            <!--display the form-->
+                            <form method="POST" action="{% url 'detail-page' posts.slug %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{form}}
+                                </div> 
+                                <button class="btn btn-primary btn-block" type="submit">Comment</button>   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 {% endblock %}

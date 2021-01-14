@@ -29,11 +29,13 @@
                 <form method="POST" enctype="multipart/form-data" style="text-align: center;">
                   {% csrf_token %}
                   {{form | crispy}}
-                  <button type="submit" class="btn btn-success btn-block">Login</button>
+                  <button type="submit" class="btn btn-success btn-block">Login</button><br>
                    <a style="color:darkblue;" href="{% url 'password_reset' %}">Forget Password</a>
                 </form>
                 <div class="text-center">
-                  <a class="small" style="color:darkblue;" href="{% url 'home' %}">Home</a>
+                
+                  <a href="{% url 'signup' %}"><button class= "primary-button" style="background-color: #0078b4;">SignUp</button></a><br>
+                  <a href="{% url 'home' %}"><button class= "primary-button" style="background-color: goldenrod;">Back To Home</button></a>
                 </div>
             </div>
           </div>

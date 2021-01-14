@@ -23,7 +23,6 @@ class ProfileUpdateView(LoginRequiredMixin,View):
     login_url = 'login'
 
     def get(self,request):
-        print('GETTING HERE')
         u_form = UserEditForm(instance= request.user)
         p_form = ProfileEditForm(instance= request.user.profile)
 
